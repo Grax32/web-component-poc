@@ -36,6 +36,7 @@
             cursor: pointer;
         }
         #main {
+            z-index: -1;
             top: 0;
             left: 0;
             position: absolute;
@@ -52,13 +53,13 @@
     </style>
 </head>
 <body>
+    <div id="main">
+    </div>
     <div id="video-container">
         <video id="video" controls>
             <source src="big_buck_bunny.mp4" type="video/mp4" autoplay controls muted>
             Your browser does not support the video tag.
         </video>
-        <div id="main">
-        </div>
         <div id="buttons">
             <button id="rewatch">Rewatch Video</button>
             <button id="close">Close</button>
@@ -93,7 +94,7 @@
             video.addEventListener('timeupdate', () => {
                 // Set the cookie when 25% is watched
                 if (video.currentTime / video.duration >= 0.25 && !getCookie('IWatchedTheVideo')) {
-                    setCookie('IWatchedTheVideo', 'true', 7); // Set for 7 days
+                    setCookie('IWatchedTheVideo', 'true', 14); // Set for 14 days
                 }
             });
 
@@ -110,6 +111,7 @@
         });
 
         closeButton.addEventListener('click', () => {
+            videoContainer.classList.add("hidden");
             videoContainer.style.display = 'none';
         });
     </script>
